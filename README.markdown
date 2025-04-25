@@ -59,7 +59,7 @@
 1. **複製專案**：
 
    ```bash
-   git clone <your-repository-url>
+   git clone https://github.com/n680727/LINE_Weather-Robot.git
    cd line-weather-bot
    ```
 
