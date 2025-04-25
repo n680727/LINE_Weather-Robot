@@ -66,9 +66,8 @@
 2. **建立虛擬環境（可選）**：
 
    ```bash
-   python -m venv venv
-   source venv/bin/activate  # Linux/Mac
-   venv\Scripts\activate     # Windows
+   conda create -n line-weather-bot python=3.8
+   conda activate line-weather-bot
    ```
 
 3. **安裝依賴**：
@@ -146,7 +145,7 @@ python weather.py
 ### 3. 運行每日天氣推播（send_weather_everday.py）
 
 1. 確認 `.env` 中的 `LINE_CHANNEL_ACCESS_TOKEN` 和 `OPENWEATHER_API_KEY`。
-2. 確認 `line_user_id`（預設為 `U6f61657bec2d34ad0c33c371243470e8`）是否正確。
+2. 確認 `line_user_id` 是否正確。
 3. 運行腳本：
 
    ```bash
@@ -157,29 +156,19 @@ python weather.py
 
 ## 注意事項
 
-1. **環境變數安全**：
-
-   - 不要將 `.env` 檔案上傳到 GitHub。確保 `.gitignore` 包含：
-
-     ```
-     .env
-     __pycache__/
-     *.pyc
-     ```
-
-2. **API 金鑰限制**：
+1. **API 金鑰限制**：
 
    - **OpenWeather**：確保 One Call API 3.0 訂閱有效，每日免費額度為 1,000 次呼叫。
    - **Google Maps**：確認 Geocoding API 已啟用，且未超出每日請求限制。
    - **LINE**：確保 Channel Access Token 和 Channel Secret 有效。
 
-3. **錯誤排查**：
+2. **錯誤排查**：
 
    - **401 Unauthorized（OpenWeather）**：檢查 `.env` 中的 `OPENWEATHER_API_KEY`，或重新生成金鑰。
    - **400 Bad Request（LINE）**：確認 `LINE_CHANNEL_ACCESS_TOKEN` 和 Webhook 簽名。
    - **Geocoding 失敗**：檢查 `GOOGLE_MAPS_API_KEY` 和地區名稱格式。
 
-4. **時區設定**：
+3. **時區設定**：
 
    - `send_weather_everday.py` 使用台灣時區（`Asia/Taipei`）。若部署到其他時區，需調整 `pytz.timezone`。
 
@@ -212,6 +201,9 @@ python weather.py
 🍃 風速：2.8 m/s
 ☔ 降雨機率：20%
 ```
+### 實際畫面
+![image](https://github.com/user-attachments/assets/d03ab46d-363d-4064-8c97-6772b9cd83bd)
+
 
 ## 未來改進
 
@@ -219,7 +211,3 @@ python weather.py
 - 新增天氣預報（例如未來 3 天）。
 - 提供更豐富的回覆格式（例如圖片或 Flex Message）。
 - 部署到雲端服務（例如 Heroku 或 AWS），取代本地 ngrok。
-
-## 聯繫
-
-如有問題，請聯繫專案維護者或提交 GitHub Issue。
